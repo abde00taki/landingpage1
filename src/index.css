@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background-color: #fdfcf9;
+    color: #3a3a36;
+    overflow-x: hidden;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scroll-margin-top {
+    scroll-margin-top: 1rem;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+input[type='text'],
+input[type='tel'],
+textarea,
+select {
+  font-family: 'Cairo', sans-serif;
+}
+
+::selection {
+  background-color: #bd5a45;
+  color: #ffffff;
+}
