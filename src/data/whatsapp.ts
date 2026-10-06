@@ -9,6 +9,7 @@ export interface OrderData {
   phone: string;
   city: string;
   address: string;
+  size: string;
   quantity: 1 | 2;
   color1: ColorKey;
   color2: ColorKey;
@@ -32,6 +33,7 @@ export function buildOrderMessage(d: OrderData): string {
     lines.push(`🎨 القطعة الثانية: ${colorName(d.color2)}`);
   }
 
+  lines.push(`📏 المقاس: ${d.size}`);
   lines.push('');
   const total = d.quantity === 1 ? '270 درهم' : '500 درهم';
   lines.push(`💰 المجموع: ${total}`);

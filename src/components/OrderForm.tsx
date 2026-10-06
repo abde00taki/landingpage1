@@ -14,9 +14,10 @@ interface FormFields {
   phone: string;
   city: string;
   address: string;
+  size: string;
 }
 
-const EMPTY_FIELDS: FormFields = { name: '', phone: '', city: '', address: '' };
+const EMPTY_FIELDS: FormFields = { name: '', phone: '', city: '', address: '', size: '' };
 
 const MOROCCAN_PHONE_RE = /^(?:\+212|0)([5-7])\d{8}$/;
 
@@ -44,6 +45,7 @@ export default function OrderForm({ quantity, color1, color2 }: OrderFormProps) 
     }
     if (!fields.city.trim()) e.city = 'المرجو إدخال المدينة';
     if (!fields.address.trim()) e.address = 'المرجو إدخال العنوان الكامل';
+    if (!fields.size.trim()) e.size = 'المرجو إدخال المقاس المطلوب';
     setErrors(e);
 
     if (Object.keys(e).length > 0) {
@@ -63,6 +65,7 @@ export default function OrderForm({ quantity, color1, color2 }: OrderFormProps) 
       phone: fields.phone.trim(),
       city: fields.city.trim(),
       address: fields.address.trim(),
+      size: fields.size.trim(),
       quantity,
       color1,
       color2,
@@ -171,6 +174,31 @@ export default function OrderForm({ quantity, color1, color2 }: OrderFormProps) 
               }`}
             />
             {errors.address && <p className="mt-1.5 text-sm text-red-500 font-medium">{errors.address}</p>}
+          </div>
+
+          {/* Size */}
+          <div className="mb-4">
+            <label htmlFor="f-size" className="block text-sm font-bold text-charcoal-700 mb-1.5">
+              المقاس
+            </label>
+            <input
+              id="f-size"
+              name="size"
+              type="text"
+              ref={(el) => { fieldRefs.current.size = el; }}
+              value={fields.size}
+              onChange={(e) => updateField('size', e.target.value)}
+              placeholder="كتبي المقاس اللي بغيتي، مثال: M أو L أو 42"
+              aria-required="true"
+              aria-invalid={!!errors.size}
+              aria-describedby={errors.size ? 'f-size-error' : undefined}
+              className={`w-full px-4 py-3 rounded-xl border-2 outline-none transition-colors text-charcoal-900 placeholder:text-charcoal-300 ${
+                errors.size
+                  ? 'border-red-400 bg-red-50 focus:border-red-500'
+                  : 'border-beige-200 focus:border-bordeaux-500 bg-beige-50/50'
+              }`}
+            />
+            {errors.size && <p id="f-size-error" className="mt-1.5 text-sm text-red-500 font-medium">{errors.size}</p>}
           </div>
 
           {/* Quantity display (read-only, driven by OfferSelector) */}
